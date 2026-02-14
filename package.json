@@ -1,7 +1,7 @@
 {
   "name": "flare-stack",
   "version": "1.0.0",
-  "description": "Incinerate the backlog. Industrial-grade parallel engine — Git Worktree orchestration + AI-driven combustion cycle for multi-ticket sprints.",
+  "description": "Ship a sprint in a day. Isolated AI chambers per ticket. The workflow Git never gave you.",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -48,6 +48,9 @@
     "url": "https://github.com/danielpinto-developer/flare-stack.git"
   },
   "homepage": "https://github.com/danielpinto-developer/flare-stack#readme",
+  "bugs": {
+    "url": "https://github.com/danielpinto-developer/flare-stack/issues"
+  },
   "engines": {
     "node": ">=20.0.0"
   },

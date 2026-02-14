@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📖 Documentation
+    url: https://github.com/danielpinto-developer/flare-stack#readme
+    about: Check the README for setup guides, commands, and feature documentation.
