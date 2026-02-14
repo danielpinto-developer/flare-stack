@@ -1,0 +1,17 @@
+[
+  {
+    "ticket": "IW-6034",
+    "expectedRepo": "inno",
+    "expectedBranch": "feature/ciwp-cohort"
+  },
+  {
+    "ticket": "IW-6045",
+    "expectedRepo": "inno",
+    "expectedBranch": "feature/ciwp-cohort"
+  },
+  {
+    "ticket": "IW-6046",
+    "expectedRepo": "inno",
+    "expectedBranch": "feature/ciwp-cohort"
+  }
+]

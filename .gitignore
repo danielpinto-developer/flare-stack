@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.velocity/
+velocity-workspaces/
+*.log
+.DS_Store
+.env
+.env.*

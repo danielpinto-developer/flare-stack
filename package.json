@@ -1,0 +1,77 @@
+{
+  "name": "flare-stack",
+  "version": "1.0.0",
+  "description": "Incinerate the backlog. Industrial-grade parallel engine — Git Worktree orchestration + AI-driven combustion cycle for multi-ticket sprints.",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "flare": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "prompts",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "start": "node dist/cli.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "git",
+    "worktree",
+    "ai",
+    "agent",
+    "cli",
+    "flare",
+    "sprint",
+    "jira",
+    "productivity",
+    "parallel",
+    "developer-tools",
+    "gemini",
+    "vertex-ai",
+    "google-cloud",
+    "devops",
+    "dx"
+  ],
+  "author": "FLARE STACK Contributors",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/danielpinto-developer/flare-stack.git"
+  },
+  "homepage": "https://github.com/danielpinto-developer/flare-stack#readme",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "@browserbasehq/stagehand": "^3.0.8",
+    "@google/generative-ai": "^0.24.1",
+    "@inquirer/prompts": "^8.2.0",
+    "@modelcontextprotocol/sdk": "^1.26.0",
+    "chalk": "^5.4.1",
+    "commander": "^13.1.0",
+    "cosmiconfig": "^9.0.0",
+    "dotenv": "^17.2.4",
+    "ink": "^6.6.0",
+    "kokoro-js": "^1.2.1",
+    "react": "^19.2.4",
+    "simple-git": "^3.27.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "@types/react": "^19.2.13",
+    "playwright": "^1.58.2",
+    "tsup": "^8.3.6",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.5"
+  }
+}
