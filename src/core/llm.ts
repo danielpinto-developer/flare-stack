@@ -68,14 +68,16 @@ export async function callLLM(
         responseMimeType: "application/json",
       },
     });
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), LLM_TIMEOUT_MS);
-    try {
-      const result = await model.generateContent(prompt);
-      return result.response.text();
-    } finally {
-      clearTimeout(timeout);
-    }
+    const result = await Promise.race([
+      model.generateContent(prompt),
+      new Promise<never>((_, reject) =>
+        setTimeout(
+          () => reject(new Error(`Gemini API timeout after ${LLM_TIMEOUT_MS}ms`)),
+          LLM_TIMEOUT_MS,
+        ),
+      ),
+    ]);
+    return result.response.text();
   }
 
   if (provider.name === "openai") {
