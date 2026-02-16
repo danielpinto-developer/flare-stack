@@ -4,6 +4,27 @@ description: Run the implementation phase — write production code using YOUR s
 
 When the user says "flare implement", "implement", or "write the code", do the following using YOUR OWN capabilities (do NOT run the CLI):
 
+## 🛑 WORKTREE GATE (MANDATORY — DO NOT SKIP)
+
+> [!CAUTION]
+> **You MUST verify you are inside a git worktree BEFORE writing any code. If this check fails, STOP and run the worktree setup from `/flare-plan` Step 0.**
+
+```bash
+git rev-parse --git-dir 2>/dev/null && echo "WORKTREE OK" || echo "NOT A WORKTREE"
+git branch --show-current       # Must show feat/<ticket-id>
+ls node_modules/.package-lock.json 2>/dev/null && echo "DEPS OK" || echo "DEPS MISSING"
+```
+
+If any check fails:
+
+1. Run the worktree setup from `/flare-plan` Step 0
+2. Then continue with implementation
+
+> [!CAUTION]
+> **ALL code is written inside THIS chamber.** Do NOT edit files in the main repo (e.g., `~/Documents/inno`). Do NOT `cd` into the parent repo to write code. The chamber IS the repo checkout. If you find yourself writing to a path outside this chamber, **STOP IMMEDIATELY** — you are doing it wrong.
+
+---
+
 ## Pre-flight Check
 
 1. Read `TICKET.md` — classify as Backend Only / Frontend Only / Full Stack
@@ -12,27 +33,11 @@ When the user says "flare implement", "implement", or "write the code", do the f
    - If no visual references found: **STOP and ask the user for Figma URL or screenshots**
    - Do NOT write UI code without design references
 
-## Worktree Verification
-
-The chamber MUST already be a git worktree (set up during `/flare-plan`). Verify:
-
-```bash
-git branch --show-current       # Must show feat/<ticket-id>
-ls node_modules/.package-lock.json  # Must exist
-```
-
-If either fails:
-
-1. Run the worktree setup from `/flare-plan` Step 0.5
-2. Then continue with implementation
-
-**ALL code is written inside THIS chamber.** Do NOT edit files in the main repo separately.
-
 ## Implementation
 
 1. Read `3_IMPLEMENT.md` for the implementation prompt template and instructions
 2. Read `OUTPUT_PLAN.md` and `OUTPUT_VERIFY.md` for your verified plan
-3. Write production code following the plan:
+3. Write production code **inside this chamber** following the plan:
    - **Backend:** models, migrations, routes, controllers, seeders, tests
    - **Frontend:** components, hooks, styles, PropTypes, tests
    - **Full Stack:** backend first, then frontend

@@ -4,51 +4,18 @@ description: Run the planning phase — create an implementation plan using YOUR
 
 When the user says "flare plan", "plan", or "create a plan", do the following using YOUR OWN capabilities (do NOT run the CLI):
 
-## Pre-check — Existing Output
+## 🛑 STEP 0 — WORKTREE GATE (MANDATORY — DO NOT SKIP)
 
-If `OUTPUT_PLAN.md` already exists, **ask the user:**
+> [!CAUTION]
+> **This step is NON-NEGOTIABLE. If the chamber is not a git worktree, you MUST NOT read any code, write any code, or do ANY planning until it is fixed. STOP EVERYTHING.**
 
-> 📋 An existing plan (`OUTPUT_PLAN.md`) was found. What would you like to do?
->
-> 1. **Overwrite** — start fresh with a new plan
-> 2. **Revise** — read the existing plan and improve it with the updated workflow
-> 3. **Skip** — keep the current plan and move to `/flare-verify`
-
-**WAIT for the user to choose.** Then proceed accordingly.
-
-## Step 0 — Classify the Ticket
-
-Read `TICKET.md` and classify it as one of:
-
-| Scope                | Signals                                                     | What it means                                               |
-| -------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| **🖥️ Backend Only**  | migration, model, API endpoint, seeder, no UI mentions      | Skip forge phase. No Figma needed. Focus on DB, API, tests. |
-| **🎨 Frontend Only** | component, modal, widget, UI, CSS, no DB/migration mentions | **REQUIRE Figma URL or screenshots before implementing.**   |
-| **🔥 Full Stack**    | both backend AND frontend                                   | **REQUIRE Figma for frontend portion.** Plan backend first. |
-
-### 🛑 Confirm Classification with User
-
-Announce your classification and **ASK THE USER TO CONFIRM:**
-
-> 📋 **Ticket Scope: [Backend Only | Frontend Only | Full Stack]**
-> I classified this as **[scope]** because: [brief reason].
-> ✅ **Correct?** If not, tell me the right scope.
-
-**WAIT for confirmation.** If frontend/full-stack and confirmed, ask for Figma URL or screenshots.
-
----
-
-## Step 0.5 — Set Up Chamber as Git Worktree
-
-**The chamber directory (where THIS workspace is open) MUST be a proper git worktree.** This ensures the agent can run code, tests, and git commands all from inside the chamber.
-
-### Check if the chamber is already a worktree:
+Run this check FIRST, before anything else:
 
 ```bash
 git rev-parse --git-dir 2>/dev/null && echo "WORKTREE OK" || echo "NOT A WORKTREE"
 ```
 
-### If NOT a worktree — set it up:
+### If "NOT A WORKTREE":
 
 1. Read `flare.config.ts` to get the target repo path and source branch
 2. Determine the source branch from `flare.config.ts` → `repos.<repo>.branches` (use the feature/dev branch, not `main`)
@@ -81,7 +48,7 @@ node -e "console.log('Node OK')"
 npx jest --version  # Should print jest version
 ```
 
-### If already a worktree:
+### If "WORKTREE OK":
 
 1. Confirm you're on the right feature branch
 2. If `node_modules` is missing, run `npm install`
@@ -89,13 +56,48 @@ npx jest --version  # Should print jest version
 
 ### Rules:
 
-- The chamber IS the worktree. All code, tests, and git commands run from HERE.
-- NEVER operate on the "target repo" separately — everything happens in the chamber.
+- **The chamber IS where ALL code lives.** All edits, tests, and git commands run from HERE.
+- **NEVER edit files in the main repo (e.g., ~/Documents/inno).** That is the PARENT — not your workspace.
+- **NEVER cd into the parent repo to write code.** Only cd into it to run `git worktree add`.
 - If the worktree branch already exists elsewhere, prune stale entries first: `git worktree prune` from the main repo.
 
 ---
 
-## Step 0.75 — Challenge the Ticket (Trust but Verify)
+## Pre-check — Existing Output
+
+If `OUTPUT_PLAN.md` already exists, **ask the user:**
+
+> 📋 An existing plan (`OUTPUT_PLAN.md`) was found. What would you like to do?
+>
+> 1. **Overwrite** — start fresh with a new plan
+> 2. **Revise** — read the existing plan and improve it with the updated workflow
+> 3. **Skip** — keep the current plan and move to `/flare-verify`
+
+**WAIT for the user to choose.** Then proceed accordingly.
+
+## Step 1 — Classify the Ticket
+
+Read `TICKET.md` and classify it as one of:
+
+| Scope                | Signals                                                     | What it means                                               |
+| -------------------- | ----------------------------------------------------------- | ----------------------------------------------------------- |
+| **🖥️ Backend Only**  | migration, model, API endpoint, seeder, no UI mentions      | Skip forge phase. No Figma needed. Focus on DB, API, tests. |
+| **🎨 Frontend Only** | component, modal, widget, UI, CSS, no DB/migration mentions | **REQUIRE Figma URL or screenshots before implementing.**   |
+| **🔥 Full Stack**    | both backend AND frontend                                   | **REQUIRE Figma for frontend portion.** Plan backend first. |
+
+### 🛑 Confirm Classification with User
+
+Announce your classification and **ASK THE USER TO CONFIRM:**
+
+> 📋 **Ticket Scope: [Backend Only | Frontend Only | Full Stack]**
+> I classified this as **[scope]** because: [brief reason].
+> ✅ **Correct?** If not, tell me the right scope.
+
+**WAIT for confirmation.** If frontend/full-stack and confirmed, ask for Figma URL or screenshots.
+
+---
+
+## Step 2 — Challenge the Ticket (Trust but Verify)
 
 The Jira ticket was written by a lead using LLM assistance. The technical suggestions in the ticket are **guidelines, not gospel.** You are a senior full-stack engineer — act like one.
 
@@ -131,12 +133,12 @@ The Jira ticket was written by a lead using LLM assistance. The technical sugges
 
 ---
 
-## Step 1 — Plan
+## Step 3 — Plan
 
 1. Read `1_PLAN.md` for the planning prompt template and instructions
-2. Analyze the codebase thoroughly — understand existing patterns, conventions, file structure
+2. Analyze the codebase **INSIDE THIS CHAMBER** thoroughly — understand existing patterns, conventions, file structure
 3. If frontend/full-stack: check for images in `images/` directory
-4. Incorporate any corrections from Step 0.75 (ticket challenges)
+4. Incorporate any corrections from Step 2 (ticket challenges)
 5. Create a detailed implementation plan addressing every ticket requirement
 6. Write the plan to `OUTPUT_PLAN.md`
 7. Report the plan back to the user for review, including:
